@@ -4,6 +4,7 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { TOKEN_2022_PROGRAM_ID, createMintToInstruction, createAssociatedTokenAccountInstruction, getMintLen, createInitializeMetadataPointerInstruction, createInitializeMintInstruction, TYPE_SIZE, LENGTH_SIZE, ExtensionType, getAssociatedTokenAddressSync } from "@solana/spl-token"
 import { createInitializeInstruction, pack } from '@solana/spl-token-metadata';
 import { useState } from "react";
+import WalletAdapter from '../components/WallatAdapter';
 window.Buffer = Buffer;
 
 
@@ -91,8 +92,10 @@ function MemeCoin() {
     }
 
     return (
+        <WalletAdapter >
+
         <>
-         <div className="bg-black h-screen ">
+         <div className=" h-full bg-black/95">
         <div className="flex flex-col  justify-center align-center items-center translate-y-[50%]">
 
         <input className='inputText w-max py-2 rounded px-10 ' type='text'   placeholder='Name'  value={name} onChange={(e)=>{setName(e.target.value)}} ></input> <br />
@@ -104,6 +107,7 @@ function MemeCoin() {
      
     </div>
         </>
+        </WalletAdapter>
     )
 }
 

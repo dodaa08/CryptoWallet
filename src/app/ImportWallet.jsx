@@ -43,7 +43,7 @@ function ImportWallet() {
   const toggleShowPrivateKey = () => setShowPrivateKey(!showPrivateKey);
 
   return (
-    <div className={`bg-black text-white  h-screen`}>
+    <div className={` text-white  h-screen`}>
     
 
       <main className="contentBox text-center ">

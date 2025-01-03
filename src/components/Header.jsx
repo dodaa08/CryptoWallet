@@ -6,33 +6,30 @@ function Header() {
    
     return (
         <>
-         <div className='flex flex-row justify-between h-full py-3  bg-black text-white '>
-            <Link to=""> 
-            <button>
-  <div className='flex mt-5 ml-5 justify-between flex-row'>
-        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/solana-crypto-wallet-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--cryptocurrency-app-coin-pack-business-illustrations-4229368.png?f=webp" alt="" className='rounded-xl h-12 mr-5  cursor-pointer '/>
-        <h1 className='text-2xl  mt-2'>CryptoWallet</h1>
-        </div>
-            </button>
-            </Link>
-       
-       
-    
+        <div className='flex justify-around text-white py-3'>
+            
 
-        <div className='flex justify-evenly gap-10 mr-10 py-2 '>
-            <Link to="/swap">
-            <button className='flex gap-2 bg-blue-400 rounded-xl py-1 px-5 text-black mt-2 font-mono hover:bg-blue-300 transition duration-200' >
-            <h1 className='text-xl mt-1'>Swap</h1>
-            <ArrowLeftRight className='mt-1'/>
-            </button>
-            </Link>
-            <Link to="/launch">
-            <button className=''>
-            <h1 className='text-xl  mt-2 font-mono'>Launch MemeCoin</h1>
-            </button>
-            </Link>
+            
+            <div className='py-3'>
+                <Link to="/">
+                <h1 className='text-2xl'>Crypto Wallet</h1>
+                </Link>
+            </div>
+
+
+            <div className='flex gap-10'>
+                <div className='border-2 border-gray-800 py-3 px-5 rounded-xl hover:bg-gray-800 transition duration-200'>
+                <button className='text-xl'>Swap</button>
+                </div>
+                <div className='border-2 border-gray-800 py-3 px-5 rounded-xl hover:bg-gray-800 transition duration-200'>
+                <button className='text-xl'>MemeCoins</button>
+                </div>
+                <div className='border-2 border-gray-800 py-3 px-5 rounded-xl hover:bg-gray-800 transition duration-200'>
+                <button className='text-xl'>Liquidity Pool</button>
+                </div>
+            </div>
+            
         </div>
-          </div>
         </>
     )
 }

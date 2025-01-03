@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./app/Landing";
-import Layout from "./app/Layout";
+import Layout from "./Layout";
 import NewWallet from "./app/NewWallet";
 import ImportWallet from "./app/ImportWallet";
 import Swap from "./app/Swap";

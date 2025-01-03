@@ -6,27 +6,26 @@ import { Link } from 'react-router-dom';
 function Landing() {
     return (
      <>
- 
-     <div className="text-center">
-
-            <div className='py-10'>
-            <p className="text-lg md:text-2xl mt-6 text-balance text-gray-300 fade-in delay-2">
-                Making the onboarding process easy and simple
-            </p>
-          </div>
-            </div>
-        
-
-          <div className='align-center items-center flex flex-row justify-center justify-evenly py-20'>
-            <Link to="/new">
-              <button className='bg-gray-800 text-white text-2xl rounded-xl py-3 px-4  hover:bg-gray-600 transition duration-200'>New Wallet</button>
-            </Link>
-            
-            <Link to="/import">
-              <button  className='bg-gray-800 text-white text-2xl rounded-xl py-3 px-4  hover:bg-gray-600 transitsition duration-200'>Import Wallet</button>
-            </Link>
-          </div>
+     <div className='flex flex-col space-y-10 text-white h-screen'>
       
+      <div className='flex justify-center py-20 '>
+        <h1 className='text-xl font-mono border-b border-gray-700'>Learn Basics of Crypto by playing with this Website..</h1>
+      </div>
+    
+    <div className='flex justify-around'>
+      <div>
+        <Link to="new">
+        <button className='border-2 border-pink-800 py-2 px-5 rounded-xl hover:bg-gray-800 transiiton duration-200 text-l' >Create Wallet</button>
+        </Link>
+        </div>
+      <div>
+        <Link to="import">
+        <button className='border-2 border-blue-800 py-2 px-5 rounded-xl hover:bg-gray-800 transiiton duration-200 text-l' >Import Wallet</button>
+        </Link>
+        </div>
+    </div>
+    
+    </div>      
      </>   
     )
 }
