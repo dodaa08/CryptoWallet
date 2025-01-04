@@ -6,10 +6,7 @@ function Header() {
    
     return (
         <>
-        <div className='flex justify-around text-white py-3'>
-            
-
-            
+        <div className='bg-black/95 flex justify-around text-white py-3'>            
             <div className='py-3'>
                 <Link to="/">
                 <h1 className='text-2xl'>Crypto Wallet</h1>
@@ -18,13 +15,15 @@ function Header() {
 
 
             <div className='flex gap-10'>
-                <div className='border-2 border-gray-800 py-3 px-5 rounded-xl hover:bg-gray-800 transition duration-200'>
+                <div className='border-2 border-gray-800 py-3 px-4 rounded-xl hover:bg-gray-900 transition duration-200'>
                 <button className='text-xl'>Swap</button>
                 </div>
-                <div className='border-2 border-gray-800 py-3 px-5 rounded-xl hover:bg-gray-800 transition duration-200'>
-                <button className='text-xl'>MemeCoins</button>
+                <Link to="/launch">
+                <div className='border-2 border-gray-800 py-3 px-4 rounded-xl hover:bg-gray-900 transition duration-200'>
+                <button className='text-xl'>Launch Tokens</button>
                 </div>
-                <div className='border-2 border-gray-800 py-3 px-5 rounded-xl hover:bg-gray-800 transition duration-200'>
+                </Link>
+                <div className='border-2 border-gray-800 py-3 px-4 rounded-xl hover:bg-gray-900 transition duration-200'>
                 <button className='text-xl'>Liquidity Pool</button>
                 </div>
             </div>

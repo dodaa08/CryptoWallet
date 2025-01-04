@@ -1,90 +1,105 @@
 import React, { useState } from 'react';
-import nacl from 'tweetnacl';
-import { generateMnemonic, mnemonicToSeedSync } from 'bip39';
+import { mnemonicToSeedSync } from 'bip39';
 import { derivePath } from 'ed25519-hd-key';
 import { Keypair } from '@solana/web3.js';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Buffer } from 'buffer';
+import { validateMnemonic } from 'bip39';
+
 // Add the global polyfill
 window.Buffer = window.Buffer || Buffer;
 
 function ImportWallet() {
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
   const [mnemonic, setMnemonic] = useState('');
   const [showPrivateKey, setShowPrivateKey] = useState(false);
 
-  // Generate a new mnemonic phrase
- 
-
-  // Generate keys based on mnemonic
   const generateKeys = () => {
     if (!mnemonic.trim()) {
-      alert('Please enter or generate a mnemonic seed phrase.');
+      alert('Please enter a valid mnemonic seed phrase.');
       return;
     }
+
+    if (!validateMnemonic(mnemonic)) {
+      alert('Invalid mnemonic phrase.');
+      return;
+    }
+
     try {
+      // Step 1: Generate seed from the mnemonic (12-word seed)
       const seed = mnemonicToSeedSync(mnemonic);
-      const path = `m/44'/501'/0'/0'`; // Solana's derivation path
-      const derivedSeed = derivePath(path, seed.toString('hex')).key;
+      const seedHex = seed.toString('hex');
 
-      const keyPair = nacl.sign.keyPair.fromSeed(derivedSeed);
-      const keypair = Keypair.fromSecretKey(keyPair.secretKey);
+      // Step 2: Derive 32-byte seed using the derivation path
+      const path = `m/44'/501'/0'/0'`; // Solana derivation path
+      const derivedSeed = derivePath(path, seedHex).key;
 
-      setPublicKey(keypair.publicKey.toBase58());
-      setPrivateKey(Buffer.from(keyPair.secretKey).toString('hex'));
+      // Ensure the derived seed is 32 bytes
+      if (derivedSeed.length !== 32) {
+        console.error('Invalid derived seed length:', derivedSeed.length);
+        alert('Derived seed is not 32 bytes.');
+        return;
+      }
+
+      // Step 3: Generate Solana keypair from the derived seed
+      const keypair = Keypair.fromSeed(derivedSeed);
+      setPublicKey(keypair.publicKey.toString());
+      setPrivateKey(Buffer.from(keypair.secretKey).toString('hex'));
     } catch (error) {
       console.error('Error generating keys:', error);
-      alert('Invalid mnemonic or error generating keys.');
+      alert('Error generating keys. Please check your mnemonic or try again.');
     }
   };
 
   const toggleShowPrivateKey = () => setShowPrivateKey(!showPrivateKey);
 
   return (
-    <div className={` text-white  h-screen`}>
-    
-
-      <main className="contentBox text-center ">
-        <h2 className="text-4xl font-bold mb-8">Secret Recovery Phrase</h2>
-        <div className="flex justify-center gap-4 mb-8">
-          <input
-            type="text"
-            value={mnemonic}
-            onChange={(e) => setMnemonic(e.target.value)}
-            placeholder="Enter or generate seed phrase..."
-            className="w-1/2 p-3 rounded bg-gray-200 dark:bg-gray-800"
-          />
-          <button
-            onClick={generateKeys}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-400"
-          >
-            Add wallet
-          </button>
+    <div className='bg-black/95 h-max text-white'>
+      <div className='h-screen flex justify-center '>
+        <div className='flex flex-col py-20 '>
+          <div>
+            <h1 className='text-2xl'>Enter Seed Phrase</h1>
+          </div>
+          <div className='py-10'>
+            <input
+              value={mnemonic}
+              onChange={(e) => setMnemonic(e.target.value)}
+              type="text"
+              placeholder='Seed Phrase'
+              className='bg-black/95 py-3 w-96 px-5 rounded-l'
+            />
+          </div>
+          <div className='flex justify-center'>
+            <button
+              onClick={generateKeys}
+              className='border-2 py-2 px-5 rounded-xl border-gray-700 hover:bg-gray-800 transition duration-200'
+            >
+              Import
+            </button>
+          </div>
         </div>
+      </div>
 
-        {publicKey && privateKey && (
-          <div className="flex flex-col items-center">
-            <div className="bg-gray-800 text-white p-5 rounded shadow w-4/5 mb-4">
-              <h3 className="text-2xl mb-2">Public Key</h3>
-              <p className="break-all">{publicKey}</p>
-            </div>
-            <div className="bg-gray-800 text-white p-5 rounded shadow w-4/5 relative">
-              <h3 className="text-2xl mb-2">Private Key</h3>
-              <p className="break-all">
-                {showPrivateKey ? privateKey : '••••••••••••••••••••••••••••••••••••••••••'}
-              </p>
-              <button
-                onClick={toggleShowPrivateKey}
-                className="absolute top-4 right-4 text-2xl"
-              >
-                {showPrivateKey ? <FaEyeSlash /> : <FaEye />}
-              </button>
-            </div>
+      <div className='px-10'>
+        {publicKey && (
+          <div>
+            <h2 className='text-xl'>Public Key:</h2>
+            <p className='text-sm'>{publicKey}</p>
           </div>
         )}
-      </main>
+        {privateKey && (
+          <div>
+            <h2 className='text-xl'>Private Key:</h2>
+            <p className='text-sm'>
+              {showPrivateKey ? privateKey : '********'}
+              <button onClick={toggleShowPrivateKey} className='ml-2'>
+                {showPrivateKey ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

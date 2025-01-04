@@ -99,16 +99,17 @@ function NewWallet() {
 // fix the warnings and erorrs.
 
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(privateKey)
-      .then(() => {
-        alert('copied to clipboard!');
-      })
-      .catch(err => {
-        console.error('Error copying to clipboard:', err);
-        alert('Failed to copy private key.');
-      });
-  };
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert('Copied to clipboard!');
+    })
+    .catch((err) => {
+      console.error('Error copying to clipboard:', err);
+      alert('Failed to copy.');
+    });
+};
+
 
 
   
@@ -141,7 +142,7 @@ function NewWallet() {
         {word}
       </div>
     ))}
-    <div className=''><button onClick={copyToClipboard}><Copy/></button></div>
+    <div className=''><button onClick={()=>copyToClipboard(mnemonic)}><Copy/></button></div>
   </div>
 </div>
 
@@ -151,7 +152,7 @@ function NewWallet() {
     
       <div className='flex justify-center gap-5'>
       
-      <div className='space-y-10'>
+      <div className='space-y-10 mb-5'>
         {
           wallets &&
           wallets.map((wallet, index)=>(
@@ -169,7 +170,7 @@ function NewWallet() {
                   </div>
                   <div className='flex gap-10 '>
                   <h1 className='text-center'>{wallet.publicKey}</h1>
-                  <div className=''><button onClick={copyToClipboard}><Copy/></button></div>
+                  <div className=''><button onClick={()=>copyToClipboard(publicKey)}><Copy/></button></div>
                   </div>
                  
                   

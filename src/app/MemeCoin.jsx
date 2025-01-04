@@ -18,7 +18,10 @@ function MemeCoin() {
     const wallet = useWallet();
 
     async function createToken() {
-       
+       if(name == '' || symbol == '' || image == '' || supply == '') {
+          alert("Fill the data first!");
+          return;
+       }
         const mintKeypair = Keypair.generate();
         const metadata = {
             mint: mintKeypair.publicKey,
@@ -95,17 +98,23 @@ function MemeCoin() {
         <WalletAdapter >
 
         <>
-         <div className=" h-full bg-black/95">
+
+         <div className=" h-screen bg-black/95 text-white">
+        
+        <div className=''>
         <div className="flex flex-col  justify-center align-center items-center translate-y-[50%]">
 
-        <input className='inputText w-max py-2 rounded px-10 ' type='text'   placeholder='Name'  value={name} onChange={(e)=>{setName(e.target.value)}} ></input> <br />
-        <input className='inputText w-max py-2 rounded px-10 ' type='text'   placeholder='Symbol'  value={symbol} onChange={(e)=>{setSymbol(e.target.value)}}></input> <br />
-        <input className='inputText w-max py-2 rounded px-10 ' type='text'   placeholder='Image URL' value={image} onChange={(e)=>{setImage(e.target.value)}} ></input> <br />
-        <input className='inputText w-max py-2 rounded px-10 ' type='text'   placeholder='Supply' value={supply} onChange={(e)=>{setSupply(e.target.value)}} ></input> <br />
-         <button onClick={createToken} className="bg-blue-400 py-3 px-10 rounded  w-max hover:bg-blue-500 transoition duration-200">Create Token</button>
+        <input className='inputText w-max py-2 bg-black/95 border-2 border-gray-800 rounded px-10 ' type='text'   placeholder='Name'  value={name} onChange={(e)=>{setName(e.target.value)}} ></input> <br />
+        <input className='inputText w-max py-2 rounded px-10  bg-black/95 border-2 border-gray-800 ' type='text'   placeholder='Symbol'  value={symbol} onChange={(e)=>{setSymbol(e.target.value)}}></input> <br />
+        <input className='inputText w-max py-2 rounded px-10 bg-black/95 border-2 border-gray-800 ' type='text'   placeholder='Image URL' value={image} onChange={(e)=>{setImage(e.target.value)}} ></input> <br />
+        <input className='inputText w-max py-2 rounded px-10  bg-black/95 border-2 border-gray-800' type='text'   placeholder='Supply' value={supply} onChange={(e)=>{setSupply(e.target.value)}} ></input> <br />
+         <button onClick={createToken} className="bg-blue-400 py-3 px-10 rounded-xl  text-black  w-max hover:bg-blue-500 transoition duration-200">Create Token</button>
         </div>
-     
     </div>
+     
+
+
+        </div>
         </>
         </WalletAdapter>
     )
