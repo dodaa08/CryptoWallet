@@ -95,7 +95,7 @@ function MemeCoin() {
     }
 
     return (
-        <WalletAdapter >
+      
 
         <>
 
@@ -112,11 +112,9 @@ function MemeCoin() {
         </div>
     </div>
      
-
-
         </div>
         </>
-        </WalletAdapter>
+        
     )
 }
 
