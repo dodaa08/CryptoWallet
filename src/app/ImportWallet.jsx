@@ -67,7 +67,7 @@ function ImportWallet() {
               onChange={(e) => setMnemonic(e.target.value)}
               type="text"
               placeholder='Seed Phrase'
-              className='bg-black/95 py-3 w-96 px-5 rounded-l'
+              className='bg-black/95 py-3 w-96 px-5 rounded-xl border-2 border-gray-700'
             />
           </div>
           <div className='flex justify-center'>

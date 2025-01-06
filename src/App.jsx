@@ -5,7 +5,7 @@ import NewWallet from "./app/NewWallet";
 import ImportWallet from "./app/ImportWallet";
 import Swap from "./app/Swap";
 import MemeCoin from "./app/MemeCoin";
-
+import Airdrop  from "./app/Airdrop";
 
 function App() {
   const routes = [
@@ -28,6 +28,14 @@ function App() {
     {
       path : "/launch",
       element : <MemeCoin />
+    },
+    {
+      path : "/air",
+      element : <Airdrop />
+    },
+    {
+      path : "*",
+      element : <Landing />
     }
   ];
 

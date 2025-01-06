@@ -98,20 +98,19 @@ function MemeCoin() {
       
 
         <>
-
-         <div className=" h-screen bg-black/95 text-white">
-        
-        <div className=''>
-        <div className="flex flex-col  justify-center align-center items-center translate-y-[50%]">
-
-        <input className='inputText w-max py-2 bg-black/95 border-2 border-gray-800 rounded px-10 ' type='text'   placeholder='Name'  value={name} onChange={(e)=>{setName(e.target.value)}} ></input> <br />
-        <input className='inputText w-max py-2 rounded px-10  bg-black/95 border-2 border-gray-800 ' type='text'   placeholder='Symbol'  value={symbol} onChange={(e)=>{setSymbol(e.target.value)}}></input> <br />
-        <input className='inputText w-max py-2 rounded px-10 bg-black/95 border-2 border-gray-800 ' type='text'   placeholder='Image URL' value={image} onChange={(e)=>{setImage(e.target.value)}} ></input> <br />
-        <input className='inputText w-max py-2 rounded px-10  bg-black/95 border-2 border-gray-800' type='text'   placeholder='Supply' value={supply} onChange={(e)=>{setSupply(e.target.value)}} ></input> <br />
-         <button onClick={createToken} className="bg-blue-400 py-3 px-10 rounded-xl  text-black  w-max hover:bg-blue-500 transoition duration-200">Create Token</button>
+        <div className='bg-black/95 h-max'>
+        <div className='h-screen'>
+                <div className='flex justify-center text-2xl mb-2'><h1 className='text-white'>Launch Tokens </h1></div>
+              <div className='flex justify-center '>
+                <div className='flex flex-col text-white border-2 py-20 px-20 gap-6 rounded-xl bg-black border-gray-900'>
+                <input value={name} onChange={(e)=>setName(e.target.value)} type="text" placeholder='Token Name : ' className='py-2 w-72 px-5 rounded-xl bg-black border-2 border-gray-500'/>
+                <input value={symbol} onChange={(e)=>setSymbol(e.target.value)} type="text" placeholder='Symbol Text : ' className='py-2 w-72 px-5 rounded-xl bg-black border-2 border-gray-500'/>
+                <input value={image} onChange={(e)=>setImage(e.target.value)} type="text" placeholder='Image URL : ' className='py-2 w-72 px-5 rounded-xl bg-black border-2 border-gray-500'/>
+                <input value={supply} onChange={(e)=>setSupply(e.target.value)} type="text" placeholder='Supply Number : ' className='py-2 w-72 px-5 rounded-xl bg-black border-2 border-gray-500'/>
+                <div className='flex justify-center '><button className='bg-purple-400 text-black rounded-xl py-2 px-10 hover:bg-purple-500 transition duration-200' onClick={createToken}>Create</button></div>
+                </div>
+              </div>
         </div>
-    </div>
-     
         </div>
         </>
         

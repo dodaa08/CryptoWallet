@@ -11,7 +11,7 @@ import { Eye } from 'lucide-react';
 import { EyeOff } from 'lucide-react';
 import { BadgePlus } from 'lucide-react';
 import { Connection, clusterApiUrl, PublicKey } from '@solana/web3.js';
-
+import { Link } from "react-router-dom"
 const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
 
@@ -164,8 +164,12 @@ const copyToClipboard = (text) => {
                   <div className='py-2 flex flex-col'>
                   <h1 className='text-center'>{wallet.balance} Sol</h1>
                   <div className='flex justify-center gap-5 py-5'>
+                    <Link to="/air">
                     <button className='border-2 border-gray-800 rounded-xl py-2 px-5 hover:bg-gray-900 transition duration-200' >Send</button>
+                    </Link>
+                    <Link to="/swap">
                     <button className='border-2 border-gray-800 rounded-xl py-2 px-5 hover:bg-gray-900 transition duration-200' >Swap</button>
+                    </Link>
                   </div>
                   </div>
                   <div className='flex gap-10 '>
@@ -177,8 +181,8 @@ const copyToClipboard = (text) => {
                   {
                     showPrivateKey ?  
                     <>
+                    <h1 className='text-center'>Private Key:</h1>
                      <div className='flex justify-center gap-10'>
-
                     <h1 className='text-center'>{wallet.privateKey}</h1>
                     <button>
                     <EyeOff onClick={showkeys}/>
